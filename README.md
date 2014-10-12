@@ -1,7 +1,8 @@
 Arduino Yún sensors - faye pub/sub in the cloud - browser-client
 ---
 
-This repository contains code for subscribing sensor data from a [Faye](http://faye.jcoglan.com/)-server running in the cloud. It also has a led-toggle example for publishing a command back go Arduino.
+This repository contains code for subscribing to sensor data on a [Faye](http://faye.jcoglan.com/)-server running in the cloud.
+It also has a led-toggle example for publishing a command back go Arduino.
 
 Also see other repositories related to this one:
 
