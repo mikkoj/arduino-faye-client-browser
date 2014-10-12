@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Arduino-Faye-Browser Client Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="buttons">
+        <h2>LED Switch</h2>
+        <div class="Switch Off">
+            <div class="Toggle"></div>
+            <span class="On">ON</span>
+            <span class="Off">OFF</span>
+        </div>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://nortal-faye-server.azurewebsites.net/faye/client.js"></script>
+    <script type="text/javascript">
+
+        var client = new Faye.Client("http://nortal-faye-server.azurewebsites.net/faye/");
+
+        client.subscribe('/sensors', function(message) {
+            console.log(message);
+            var linearPotValue = message.rawAnalogData;
+            $('body').css('background-color', 'hsla(170, 25%, ' + linearPotValue + '%, 1)');
+        });
+
+
+        // Switch toggle
+        $('.Switch').click(function() {
+            $(this).toggleClass('On').toggleClass('Off');
+
+            var ledData = 'on';
+            var ledOn = $(this).hasClass('On');
+            if (ledOn) {
+                ledData = 'off';
+            }
+            client.publish('/commands', {
+                target: 'led',
+                data: ledData
+            }).then(function() {
+                console.log('send led command: ' + ledData);
+            });
+        });
+
+    </script>
+</body>
+</html>

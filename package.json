@@ -1,0 +1,9 @@
+{
+  "name": "arduino-faye-client-browser",
+  "version": "1.0.0",
+  "dependencies": {
+    "faye": "^1.0.3",
+    "connect": "^3.2.0",
+    "serve-static": "^1.6.4"
+  }
+}
